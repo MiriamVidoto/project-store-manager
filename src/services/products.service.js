@@ -1,7 +1,7 @@
 const { productsModel } = require('../models');
 const { validateId } = require('./validations/validateInputBySchema');
 
-const errorMessages = require('../helpers/errorMessages');
+const { notFoundData, productNotFound } = require('../helpers/errorMessages');
 const { OK, BadRequest } = require('../helpers/statusCodes');
 
 const productsServiceGetAll = async () => {
@@ -11,7 +11,7 @@ const productsServiceGetAll = async () => {
   }
 
   return {
-    message: errorMessages.notFoundData,
+    message: notFoundData,
     status: BadRequest,
   };
 };
@@ -23,7 +23,7 @@ const productsServiceGetById = async (id) => {
   const result = await productsModel.productsModelGetById(id);
   if (result === undefined) {
     return {
-      message: { message: errorMessages.productNotFound },
+      message: { message: productNotFound },
       status: BadRequest,
     };
   }
