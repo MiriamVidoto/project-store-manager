@@ -12,7 +12,7 @@ describe("Service de products", function () {
     });
 
     it("Caso de sucesso, retorna um objeto com elementos", async function () {
-      sinon.stub(productsModel, "productsModelGetAll").resolves(allProducts);
+      sinon.stub(productsModel, "productsModelGetAll").resolves(noProducts);
 
       const result = await productsService.productsServiceGetAll();
       

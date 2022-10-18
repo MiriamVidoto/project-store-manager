@@ -2,7 +2,7 @@ const { productsModel } = require('../models');
 const { validateId } = require('./validations/validateInputBySchema');
 
 const { notFoundData, productNotFound } = require('../helpers/errorMessages');
-const { OK, BadRequest } = require('../helpers/statusCodes');
+const { OK, BadRequest, Registed } = require('../helpers/statusCodes');
 
 const productsServiceGetAll = async () => {
   const result = await productsModel.productsModelGetAll();
@@ -30,7 +30,22 @@ const productsServiceGetById = async (id) => {
   return { message: result, status: OK };
 };
 
+const productsServiceRegister = async (name) => {
+  // const validationResult = validateId(name);
+  // if (validationResult.type) return validationResult;
+
+  const result = await productsModel.productsModelRegister(name);
+  // if (result === undefined) {
+  //   return {
+  //     message: { message: productNotFound },
+  //     status: BadRequest,
+  //   };
+  // }
+  return { message: { id: result, name }, status: Registed };
+};
+
 module.exports = {
   productsServiceGetAll,
   productsServiceGetById,
+  productsServiceRegister,
 };

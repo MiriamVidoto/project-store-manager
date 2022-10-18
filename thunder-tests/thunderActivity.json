@@ -28,17 +28,22 @@
     "tests": []
   },
   {
-    "_id": "4ea6a8e8-3850-4a07-827f-3889a0adafc5",
+    "_id": "e7606708-3681-4e25-9497-c63bfc58b5f3",
     "colId": "history",
     "containerId": "",
-    "name": "http://localhost:3000/products/id=2",
-    "url": "http://localhost:3000/products/id=2",
-    "method": "GET",
+    "name": "http://localhost:3000/products",
+    "url": "http://localhost:3000/products",
+    "method": "POST",
     "sortNum": 0,
-    "created": "2022-10-14T00:21:48.045Z",
-    "modified": "2022-10-14T00:21:48.125Z",
+    "created": "2022-10-17T23:12:33.317Z",
+    "modified": "2022-10-17T23:58:58.402Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"ProdutoX\"\n}",
+      "form": []
+    },
     "tests": []
   }
 ]

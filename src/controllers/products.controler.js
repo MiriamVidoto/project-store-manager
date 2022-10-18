@@ -11,7 +11,14 @@ const productsControllerGetById = async (req, res) => {
   res.status(result.status).json(result.message);
 };
 
+const productsControllerRegister = async (req, res) => {
+  const { name } = req.body;
+  const result = await productsService.productsServiceRegister(name);
+  res.status(result.status).json(result.message);
+};
+
 module.exports = {
   productsControllerGetAll,
   productsControllerGetById,
+  productsControllerRegister,
 };
