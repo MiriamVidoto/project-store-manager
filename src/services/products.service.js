@@ -2,7 +2,7 @@ const { productsModel } = require('../models');
 const { validateId } = require('./validations/validateInputBySchema');
 
 const { notFoundData, productNotFound } = require('../helpers/errorMessages');
-const { OK, BadRequest, Registed } = require('../helpers/statusCodes');
+const { OK, NotFound, Registed, BadRequest } = require('../helpers/statusCodes');
 
 const productsServiceGetAll = async () => {
   const result = await productsModel.productsModelGetAll();
@@ -12,7 +12,7 @@ const productsServiceGetAll = async () => {
 
   return {
     message: notFoundData,
-    status: BadRequest,
+    status: NotFound,
   };
 };
 
@@ -24,23 +24,29 @@ const productsServiceGetById = async (id) => {
   if (result === undefined) {
     return {
       message: { message: productNotFound },
-      status: BadRequest,
+      status: NotFound,
     };
   }
   return { message: result, status: OK };
 };
 
 const productsServiceRegister = async (name) => {
-  // const validationResult = validateId(name);
+  // const validationResult = validateName(name);
   // if (validationResult.type) return validationResult;
 
+  if (name === undefined) {
+    return { message: { message: '"name" is required' }, status: BadRequest };
+  }
+
+  if (name.length < 5) {
+    return {
+      message: { message: '"name" length must be at least 5 characters long' },
+      status: 422,
+    };
+  }
+
   const result = await productsModel.productsModelRegister(name);
-  // if (result === undefined) {
-  //   return {
-  //     message: { message: productNotFound },
-  //     status: BadRequest,
-  //   };
-  // }
+
   return { message: { id: result, name }, status: Registed };
 };
 
