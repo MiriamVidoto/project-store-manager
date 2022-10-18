@@ -21,10 +21,26 @@ const BadRequest = {
   status: 404,
 };
 
+const insertId = [
+  {
+    fieldCount: 0,
+    affectedRows: 1,
+    insertId: 4,
+    info: '',
+    serverStatus: 2,
+    warningStatus: 0
+  },
+  undefined
+]
+
+const sucessRegister = { message: { id: 4, name: "ProdutoX" }, status: 201 };
+
 module.exports = {
   allProducts,
   noProducts,
   sucessResponseAll,
   sucessResponseId,
   BadRequest,
+  insertId,
+  sucessRegister,
 };

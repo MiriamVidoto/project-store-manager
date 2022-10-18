@@ -4,7 +4,7 @@ const { productsModel } = require("../../../src/models");
 const connection = require("../../../src/models/db/connection");
 
 
-const { allProducts, noProducts } = require("../mock/products.mock");
+const { allProducts, noProducts, insertId } = require("../mock/products.mock");
 
 describe("Model de products", function () {
   describe("Listar todos os produtos", function () {
@@ -52,5 +52,18 @@ describe("Model de products", function () {
 
       expect(result).to.be.undefined;
     });  
+  });
+  describe("Cadastrar um produto", function () {
+    afterEach(() => {
+      sinon.restore();
+    });
+
+    it("Deve retornar o id referente ao produto cadastrado", async function () {
+      sinon.stub(connection, "execute").resolves(insertId);
+
+      const result = await productsModel.productsModelRegister('ProdutoX');
+
+      expect(result).to.be.equal(4);
+    });
   });
 });

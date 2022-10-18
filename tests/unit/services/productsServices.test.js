@@ -12,7 +12,7 @@ describe("Service de products", function () {
     });
 
     it("Caso de sucesso, retorna um objeto com elementos", async function () {
-      sinon.stub(productsModel, "productsModelGetAll").resolves(noProducts);
+      sinon.stub(productsModel, "productsModelGetAll").resolves(allProducts);
 
       const result = await productsService.productsServiceGetAll();
       
@@ -51,6 +51,21 @@ describe("Service de products", function () {
 
       expect(result.status).to.be.eq(404);
 
+    });
+  });
+  describe("Cadastrar um produto", function () {
+    afterEach(() => {
+      sinon.restore();
+    });
+
+    it("Em caso de sucesso, retorna um objeto com o id e o nome do produto cadastrado", async function () {
+      sinon.stub(productsModel, "productsModelRegister").resolves(4);
+
+      const result = await productsService.productsServiceRegister("ProdutoX");
+
+      expect(result.message.name).to.be.eq("ProdutoX");
+      expect(result.message.id).to.be.eq(4);
+      expect(result.status).to.be.eq(201);
     });
   });
 });
