@@ -44,10 +44,10 @@ describe("Service de products", function () {
     });
     
     it("Caso de falha,retorna uma mensagem de erro", async function () {
-      sinon.stub(productsModel, "productsModelGetAll").resolves(undefined);
+
+      sinon.stub(productsModel, "productsModelGetById").resolves(undefined);
 
       const result = await productsService.productsServiceGetById(100);
-
 
       expect(result.status).to.be.eq(404);
 
