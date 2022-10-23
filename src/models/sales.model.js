@@ -8,15 +8,14 @@ const salesModelInsert = async () => {
 };
 
 const salesProductsModelInsert = async (saleId, productId, quantity) => {
-  const result = await connection.execute(
+  await connection.execute(
     'INSERT INTO  StoreManager.sales_products (sale_id, product_id, quantity) VALUES (?,?,?)',
     [saleId, productId, quantity],
   );
-  return result;
 };
 
 const salesModelGetById = async (id) => {
-  await connection.execute(
+  const [result] = await connection.execute(
     `SELECT
     s.date,
     sp.product_id AS productId,
@@ -27,6 +26,7 @@ const salesModelGetById = async (id) => {
     WHERE sp.sale_id = ?`,
     [id],
   );
+  return result;
 };
 
 const salesModelGetAll = async () => {
@@ -40,7 +40,6 @@ const salesModelGetAll = async () => {
       INNER JOIN StoreManager.sales AS s 
       ON sp.sale_id = s.id`,
   );
-  console.log(result);
   return result;
 };
 

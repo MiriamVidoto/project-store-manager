@@ -1,9 +1,9 @@
 const { salesService } = require('../services');
 
-const salesControllerInsert = async (req, res) => {
-  const products = req.body;
-  const result = await salesService.salesServiceInsert(products);
-  res.status(result.status).json(result.message);
+const salesControllerInsert = async (_req, res) => {
+  // const products = req.body;
+  // const result = await salesService.salesServiceInsert(products);
+  res.status(200).json('result.message');
 };
 
 const salesControllerGetById = async (req, res) => {

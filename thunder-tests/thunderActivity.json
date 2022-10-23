@@ -84,11 +84,11 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3000/sales",
-    "url": "http://localhost:3000/sales",
+    "url": "http://localhost:3000/sales/52",
     "method": "GET",
     "sortNum": 0,
     "created": "2022-10-23T19:00:03.187Z",
-    "modified": "2022-10-23T19:30:09.101Z",
+    "modified": "2022-10-23T20:46:38.427Z",
     "headers": [],
     "params": [],
     "body": {
@@ -107,7 +107,7 @@
     "method": "POST",
     "sortNum": 0,
     "created": "2022-10-23T19:00:10.706Z",
-    "modified": "2022-10-23T19:34:08.891Z",
+    "modified": "2022-10-23T20:46:02.690Z",
     "headers": [],
     "params": [],
     "body": {
