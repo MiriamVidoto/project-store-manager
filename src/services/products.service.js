@@ -50,8 +50,31 @@ const productsServiceRegister = async (name) => {
   return { message: { id: result, name }, status: Registed };
 };
 
+const productsServiceUpdate = async (id, name) => {
+  const validationResult = validateId(id);
+  if (validationResult.type) return validationResult;
+
+  const result = await productsModel.productsModelGetById(id);
+  if (result === undefined) {
+    return {
+      message: { message: productNotFound },
+      status: NotFound,
+    };
+  }
+  if (result) {
+    const update = await productsModel.productsModelUpdate(id, name);
+    if (update === 1) {
+      return {
+        status: OK,
+        message: { id, name },
+      };
+    }
+  }
+};
+
 module.exports = {
   productsServiceGetAll,
   productsServiceGetById,
   productsServiceRegister,
+  productsServiceUpdate,
 };

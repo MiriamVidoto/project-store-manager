@@ -17,8 +17,16 @@ const productsControllerRegister = async (req, res) => {
   res.status(result.status).json(result.message);
 };
 
+const productsControllerUpdate = async (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
+  const result = await productsService.productsServiceUpdate(id, name);
+  res.status(result.status).json(result.message);
+};
+
 module.exports = {
   productsControllerGetAll,
   productsControllerGetById,
   productsControllerRegister,
+  productsControllerUpdate,
 };

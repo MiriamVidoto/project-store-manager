@@ -9,4 +9,6 @@ productsRoute.get('/', productsController.productsControllerGetAll);
 
 productsRoute.post('/', productsController.productsControllerRegister);
 
+productsRoute.put('/:id', productsController.productsControllerUpdate);
+
 module.exports = productsRoute;

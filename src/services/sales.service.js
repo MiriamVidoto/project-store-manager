@@ -4,16 +4,22 @@ const { OK, Registed, NotFound } = require('../helpers/statusCodes');
 const { notFoundData, saleNotFound } = require('../helpers/errorMessages');
 
 const salesServiceInsert = async (products) => {
-  const result = await salesModel.salesModelInsert(products);
+  const saleId = await salesModel.salesModelInsert();
+  const promiseSales = products.map((product) => salesModel.salesProductsModelInsert(
+    saleId,
+    product.productId,
+    product.quantity,
+  ));
+  await Promise.all(promiseSales);
   return {
     status: Registed,
-    message: result,
+    message: { id: saleId, itemsSold: products },
   };
 };
 
 const salesServiceGetById = async (id) => {
   const result = await salesModel.salesModelGetById(id);
-  if (result) {
+  if (result.length > 0) {
     return {
       status: OK,
       message: result,

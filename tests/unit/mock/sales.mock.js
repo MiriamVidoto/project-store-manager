@@ -13,7 +13,19 @@ const allSales = [
 
 const noSales = [];
 
+const sucessResponseAll = {
+  message:  allSales ,
+  status: 200,
+};
+
+const BadRequest = {
+  message: { message: "Product not found" },
+  status: 404,
+};
+
 module.exports = {
   allSales,
   noSales,
-}
+  sucessResponseAll,
+  BadRequest,
+};
