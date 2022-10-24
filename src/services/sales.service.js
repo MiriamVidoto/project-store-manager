@@ -1,9 +1,23 @@
 const { salesModel } = require('../models');
 
 const { OK, Registed, NotFound } = require('../helpers/statusCodes');
-const { notFoundData, saleNotFound } = require('../helpers/errorMessages');
+const { notFoundData, saleNotFound, productNotFound } = require('../helpers/errorMessages');
+
+const validate = async (products) => {
+  const isProductId = products
+    .map((product) => salesModel.salesModelGetById(product.productId));
+  const result = await Promise.all(isProductId);
+  return result.some((ele) => ele.length === 0);
+};
 
 const salesServiceInsert = async (products) => {
+  const isProductId = await validate(products);
+  if (isProductId) {
+      return {
+        status: NotFound,
+        message: { message: productNotFound },
+      };
+    }
   const saleId = await salesModel.salesModelInsert();
   const promiseSales = products.map((product) => salesModel.salesProductsModelInsert(
     saleId,
